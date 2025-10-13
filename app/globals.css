@@ -208,10 +208,10 @@
 } */
 
 /* =====  SHADCN OVERRIDES */
-/* .button {
-  @apply py-4 px-6 flex-center gap-3 rounded-full p-16-semibold focus-visible:ring-offset-0 focus-visible:ring-transparent !important;
+.button {
+  @apply py-4 px-6 flex place-items-center gap-3 rounded-full  font-semibold focus-visible:ring-offset-0  focus-visible:ring-transparent;
 }
-
+/* 
 .dropdown-content {
   @apply shadow-lg rounded-md overflow-hidden p-0;
 } */

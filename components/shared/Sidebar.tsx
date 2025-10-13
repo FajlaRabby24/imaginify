@@ -1,10 +1,11 @@
 "use client";
 
 import { navLinks } from "@/constants";
-import { SignedIn } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "../ui/button";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -45,8 +46,17 @@ const Sidebar = () => {
                   </li>
                 );
               })}
+              <li className="flex place-items-center cursor-pointer gap-2 p-4">
+                <UserButton showName afterSwitchSessionUrl="/" />
+              </li>
             </ul>
           </SignedIn>
+          {/* signedOUt  */}
+          <SignedOut>
+            <Button asChild className="button bg-purple-700 bg-cover">
+              <Link href={"/sign-in"}></Link>
+            </Button>
+          </SignedOut>
         </nav>
       </div>
     </aside>
