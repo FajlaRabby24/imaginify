@@ -353,11 +353,11 @@
 } */
 
 /* Sidebar Component */
-/* .sidebar {
-  @apply hidden h-screen w-72 bg-white p-5 shadow-md shadow-purple-200/50 lg:flex;
-} */
+.sidebar {
+  @apply hidden h-screen w-72 bg-white p-5 shadow-md shadow-purple-200 lg:flex;
+}
 
-/* .sidebar-logo {
+.sidebar-logo {
   @apply flex items-center gap-2 md:py-2;
 }
 
@@ -367,15 +367,15 @@
 
 .sidebar-nav_elements {
   @apply hidden w-full flex-col items-start gap-2 md:flex;
-} */
+}
 
-/* .sidebar-nav_element {
-  @apply flex-center p-16-semibold w-full whitespace-nowrap rounded-full bg-cover  transition-all hover:bg-purple-100 hover:shadow-inner;
+.sidebar-nav_element {
+  @apply flex place-items-center  font-semibold w-full whitespace-nowrap rounded-full bg-cover  transition-all hover:bg-purple-100 hover:shadow-inner;
 }
 
 .sidebar-link {
-  @apply p-16-semibold flex size-full gap-4 p-4;
-} */
+  @apply font-semibold flex size-full gap-4 p-4;
+}
 
 /* TransformationForm Component */
 /* .prompt-field {
