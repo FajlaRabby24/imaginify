@@ -1,22 +1,36 @@
 import mongoose, { Mongoose } from "mongoose";
 
+// ====== Extend global to include mongoose connection
+declare global {
+  var mongoose:
+    | {
+        conn: Mongoose | null;
+        promise: Promise<Mongoose> | null;
+      }
+    | undefined;
+}
+
+// ====== MongoDB URL
 const MONGODB_URL = process.env.MONGODB_URL as string;
 
+// ====== Mongoose connection interface
 interface MongooseConnection {
   conn: Mongoose | null;
   promise: Promise<Mongoose> | null;
 }
 
-let cached: MongooseConnection = (global as any).mongoose;
+// ====== Use cached connection or initialize
+const cached: MongooseConnection = global.mongoose ?? {
+  conn: null,
+  promise: null,
+};
 
-if (!cached) {
-  cached = (global as any).mongoose = {
-    conn: null,
-    promise: null,
-  };
+if (!global.mongoose) {
+  global.mongoose = cached;
 }
 
-export const connectDB = async () => {
+// ====== Connect function
+export const connectDB = async (): Promise<Mongoose> => {
   if (cached.conn) return cached.conn;
 
   if (!MONGODB_URL) throw new Error("Missing Mongodb url");
