@@ -130,11 +130,11 @@
 }
 
 .root-container {
-  @apply mt-16 flex-1 overflow-auto py-8 lg:mt-0 lg:max-h-screen lg:py-10;
+  @apply mt-16 flex-1 overflow-auto py-6 lg:py-8 lg:mt-0 lg:max-h-screen;
 }
 
 .wrapper {
-  @apply max-w-5xl mx-auto px-5 md:px-10 w-full text-black p-16;
+  @apply max-w-5xl mx-auto px-5 md:px-10 w-full text-black;
 }
 
 .gradient-text {
@@ -218,22 +218,22 @@
 
 /* .dropdown-item {
   @apply p-16-semibold text-dark-700 cursor-pointer transition-all px-4 py-3 rounded-none outline-none hover:border-none focus-visible:ring-transparent hover:text-white hover:bg-purple-gradient hover:bg-cover focus-visible:ring-offset-0 focus-visible:outline-none !important;
-}
+}*/
 
 .input-field {
-  @apply rounded-[16px] border-2 border-purple-200/20 shadow-sm shadow-purple-200/15 text-dark-600 disabled:opacity-100 p-16-semibold h-[50px] md:h-[54px] focus-visible:ring-offset-0 px-4 py-3 focus-visible:ring-transparent !important;
-} */
+  @apply rounded-[16px] border-2 border-purple-200/20 shadow-sm shadow-purple-200/15 text-gray-600 disabled:opacity-100  h-[50px] md:h-[54px] focus-visible:ring-offset-0 px-4 py-3 focus-visible:ring-transparent;
+}
 
 /* .search-field {
   @apply border-0 bg-transparent text-dark-600 w-full placeholder:text-dark-400 h-[50px] p-16-medium focus-visible:ring-offset-0 p-3 focus-visible:ring-transparent !important;
 }
-
+*/
 .submit-button {
-  @apply bg-purple-gradient bg-cover rounded-full py-4 px-6 p-16-semibold h-[50px] w-full md:h-[54px];
+  @apply bg-purple-600 bg-cover rounded-full py-4 px-6  h-[50px] w-full md:h-[54px];
 }
 
 .select-field {
-  @apply w-full border-2 border-purple-200/20 shadow-sm shadow-purple-200/15 rounded-[16px] h-[50px] md:h-[54px] text-dark-600 p-16-semibold disabled:opacity-100 placeholder:text-dark-400/50 px-4 py-3 focus:ring-offset-0 focus-visible:ring-transparent focus:ring-transparent focus-visible:ring-0 focus-visible:outline-none !important;
+  @apply w-full border-2 border-purple-200/20 shadow-sm shadow-purple-200/15 rounded-[16px] h-[50px] md:h-[54px] text-gray-600 disabled:opacity-100 placeholder:text-gray-400/50 px-4 py-3 focus:ring-offset-0 focus-visible:ring-transparent focus:ring-transparent focus-visible:ring-0 focus-visible:outline-none;
 }
 
 .select-trigger {
@@ -242,7 +242,7 @@
 
 .select-item {
   @apply py-3 cursor-pointer hover:bg-purple-100;
-} */
+}
 
 /* .IconButton {
   @apply focus-visible:ring-transparent focus:ring-offset-0 focus-visible:ring-offset-0 focus-visible:outline-none focus-visible:border-none !important;
@@ -381,10 +381,10 @@
 }
 
 /* TransformationForm Component */
-/* .prompt-field {
+.prompt-field {
   @apply flex flex-col gap-5 lg:flex-row lg:gap-10;
 }
-
+/*
 .media-uploader-field {
   @apply grid h-fit min-h-[200px] grid-cols-1 gap-5 py-4 md:grid-cols-2;
 } */
