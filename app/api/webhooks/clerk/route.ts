@@ -6,6 +6,8 @@ import { NextResponse } from "next/server";
 import { Webhook } from "svix";
 
 export async function POST(req: Request) {
+  console.log("🔥 Webhook received"); // <--- Log start
+
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
@@ -15,12 +17,14 @@ export async function POST(req: Request) {
   }
 
   // Get headers
-  const headerPayload = headers();
-  const svix_id = (await headerPayload).get("svix-id");
-  const svix_timestamp = (await headerPayload).get("svix-timestamp");
-  const svix_signature = (await headerPayload).get("svix-signature");
+  const headerPayload = await headers();
+
+  const svix_id = headerPayload.get("svix-id");
+  const svix_timestamp = headerPayload.get("svix-timestamp");
+  const svix_signature = headerPayload.get("svix-signature");
 
   if (!svix_id || !svix_timestamp || !svix_signature) {
+    console.log("❌ Missing Svix headers");
     return new Response("Error occurred -- missing svix headers", {
       status: 400,
     });
@@ -29,6 +33,7 @@ export async function POST(req: Request) {
   // Get body
   const payload = await req.json();
   const body = JSON.stringify(payload);
+  console.log("📦 Payload:", payload);
 
   // Verify the payload
   const wh = new Webhook(WEBHOOK_SECRET);
@@ -41,9 +46,10 @@ export async function POST(req: Request) {
       "svix-signature": svix_signature,
     }) as WebhookEvent;
   } catch (err) {
-    console.error("Error verifying webhook:", err);
+    console.error("❌ Error verifying webhooks", err);
     return new Response("Error occurred", { status: 400 });
   }
+  console.log("✅ Webhook verified:", evt.type);
 
   const { id } = evt.data;
   const eventType = evt.type;
@@ -51,26 +57,22 @@ export async function POST(req: Request) {
   // ✅ CREATE USER
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } =
-      evt.data;
+      evt.data as any;
+
+    console.log("✅ Event Data:", evt.data);
 
     const user = {
       clerkId: id,
-      email: email_addresses?.[0]?.email_address || "",
-      username: username ?? `user_${id.slice(0, 6)}`,
+      email: email_addresses?.[0]?.email_address || "test@gmail.com",
+      userName: username ?? `user_${id.slice(0, 6)}`,
       firstName: first_name ?? "",
       lastName: last_name ?? "",
       photo: image_url ?? "",
     };
 
     const newUser = await createUser(user);
+    console.log("✅ New User Created:", newUser);
     const clerk = await clerkClient();
-    if (newUser) {
-      await clerk.users.updateUserMetadata(id, {
-        publicMetadata: {
-          userId: newUser._id,
-        },
-      });
-    }
 
     return NextResponse.json({ message: "OK", user: newUser });
   }
@@ -78,6 +80,7 @@ export async function POST(req: Request) {
   // ✅ UPDATE USER
   if (eventType === "user.updated") {
     const { id, image_url, first_name, last_name, username } = evt.data;
+    console.log("user created");
 
     const user = {
       firstName: first_name ?? "",

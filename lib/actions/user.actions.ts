@@ -9,9 +9,9 @@ import { handleError } from "../utils";
 export async function createUser(user: CreateUserParams) {
   try {
     await connectDB();
-
+    console.log(user, "user from route.ts");
     const newUser = await UserModel.create(user);
-    return JSON.parse(JSON.stringify(newUser));
+    return new Response(newUser, { status: 201 });
   } catch (error) {
     handleError(error);
   }
